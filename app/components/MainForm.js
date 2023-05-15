@@ -10,8 +10,9 @@ import ThankYou from "./ThankYou";
 import Card from "react-bootstrap/cjs/Card";
 import {Link, animateScroll as scroll} from "react-scroll";
 import { fetchRepresentatives } from '../assets/petitions/fetchRepresentatives';
-
-const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, clientId, states, tweet, typData, mainData, backendURLBase, endpoints, backendURLBaseServices, setAllDataIn, allDataIn}) => {
+import ProgressBar from './ProgressBar';
+import {fetchAllLeads} from '../assets/petitions/fetchLeads'
+const MainForm = ({setLeads,leads,dataUser, setDataUser, mp, setMp, setEmailData, emailData, clientId, states, tweet, typData, mainData, backendURLBase, endpoints, backendURLBaseServices, setAllDataIn, allDataIn}) => {
     const [showLoadSpin, setShowLoadSpin] = useState(false)
     const [showList, setShowList] = useState(true)
     const [showFindForm, setShowFindForm] = useState(false)
@@ -28,20 +29,20 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
         setTac(false)
       }
     }
-
     const handleChange = e => {
         e.preventDefault();
         setDataUser({
             ...dataUser,
             [e.target.name]: e.target.value
         })
-
     }
     const { zipCode, emailUser } = dataUser;
-
     const click = async e => {
         e.preventDefault();
-
+        const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+        const isValidEmail = (email) => {
+          return emailRegex.test(email);
+        };
         const form = e.currentTarget;
         if (form.checkValidity() === false) {
             e.preventDefault();
@@ -49,32 +50,19 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
         }
         setValidated(true);
         if (
-        tac === false || zipCode.trim() === '' || emailUser.trim() === '') {
-            
+        tac === false || zipCode.trim() === '' || isValidEmail(emailUser) === false) {   
             setError(true)
             return
         }
-        
         setShowLoadSpin(true)
         setError(false)
         fetchRepresentatives('GET',backendURLBase, endpoints.teGetRepresentativesPerStates, clientId, `&state=${dataUser.state}`, setMp, setShowLoadSpin, setShowList, setAllDataIn)        
         .catch(error => console.log('error', error));
-
-
-
         scroll.scrollToBottom();
     }
-    
-   
     if(!mainData) return 'loading datos'
     if(!mp) return 'loading datos'
-    // console.log('Main page data', mainData)
-    //         console.log('Email data', dataUser)
-    //         console.log('States data', states)
-    //         console.log('tweets', tweet)
-    //         console.log('TYPdata', typData)
     return (
-
         <div className={'contenedor main-form-flex-container'} >
             <Card className="bg-dark card-img text-white main-image-container">
                 <Card.Header className='card-img'  style={{ backgroundImage: `url(${ mainData.mainImg })`, backgroundPosition: 'center', backgroundSize: 'cover' } } 
@@ -90,6 +78,10 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
                          </Card.Body>
                      </Card.ImgOverlay>
             </Card>
+            <ProgressBar
+            leads={leads}
+            mainData={mainData}
+            />
             <div className={'container instructions' } >
                 { mainData.instruction}
             </div>
@@ -107,10 +99,11 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
                         duration={500}
                     >
                     </Link>
-                    <Form onSubmit={click} noValidate validated={validated}>
+                    <Form name='fm-find' onSubmit={click} noValidate validated={validated}>
                         <h3 className='find-her-mp-text'>{mainData.firstFormLabel1}</h3>
                         <Form.Group>
                             <Form.Control
+                            id="emailInput-mainForm"
                                 type="email"
                                 placeholder={mainData.firstFormPlaceholder1}
                                 name="emailUser"
@@ -130,6 +123,7 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
                                 }
                             </Form.Select> */}
                             <Form.Control
+                             id="postalcodeInput-mainForm"
                                 type="text"
                                 placeholder={mainData.firstFormPlaceholder2}
                                 name="zipCode"
@@ -138,8 +132,9 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
                                 maxLength="5"
                             />
                         </Form.Group>
-                        <Form.Group style={{textAlign: "justify"}} controlId="conditions">
+                        <Form.Group style={{textAlign: "justify"}}>
                             <Form.Check
+                             id="tycCheckbox-mainForm"
                             name="conditions"
                             onClick={handleTerms}
                             required
@@ -150,6 +145,7 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
                         </Form.Group>
                         <Form.Group>
                             <Button
+                             id="findButton-mainForm"
                                 type={'submit'}
                                 variant={'dark'}
                                 size={'lg'}
@@ -227,5 +223,3 @@ const MainForm = ({dataUser, setDataUser, mp, setMp, setEmailData, emailData, cl
     )
 }
 export default MainForm
-
-

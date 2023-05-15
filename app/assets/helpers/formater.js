@@ -9,6 +9,8 @@ export const formater = async(data) =>{
     specificdata.backgroundImage?.sizes.card.url ? formatedData.mainImg = specificdata.backgroundImage?.sizes.card.url : ''
     specificdata.header?.mainTitle ? formatedData.title = specificdata.header?.mainTitle : ''
     specificdata.header?.mainSubtitle ? formatedData.subtitle = specificdata.header.mainSubtitle : ''
+    specificdata.header?.progressBarTitle ? formatedData.progressBarTitle = specificdata.header.progressBarTitle : ''
+    specificdata.header?.progressBarSubtitle ? formatedData.progressBarSubtitle = specificdata.header.progressBarSubtitle : ''
     specificdata.header?.instructions ? formatedData.instruction = specificdata.header.instructions : ''
     specificdata.form?.['Find Button'] ? formatedData.findBtnText = specificdata.form?.['Find Button'] : ''
     specificdata.form?.labelOne ? formatedData.firstFormLabel1 = specificdata.form?.labelOne : ''

@@ -77,22 +77,21 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
     
     return (
         <>
-        {
-        
-        
+        {     
         <div className={'emailContainer'} hidden={showEmailForm}>
             {error ? <Alert variant={'danger'}>
             All fields are required, please fill in the missing ones.
             </Alert> : null}
-            <Form onSubmit={send} noValidate validated={validated}>
+            <Form name='fm-email' onSubmit={send} noValidate validated={validated}>
                 <div className={'formEmail'}>
                     <Col>
                         <Form.Group
-                            controlId="name">
+                            >
                             <Form.Label>
                                 {mainData.emailFormUserNameLabel}
                             </Form.Label>
                             <Form.Control
+                            id='username-emailform'
                                 type="text"
                                 placeholder={mainData.emailFormUserNamePlaceholder}
                                 name="userName"
@@ -103,7 +102,7 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
                     </Col>
                     <Col>
                         <Form.Group
-                            controlId="email">
+                            >
                             <Form.Label>
                                 {mainData.emailFormUserLabel}
                             </Form.Label>
@@ -121,11 +120,12 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
                 <div className='input-subject'>
                     <Col>
                         <Form.Group
-                            controlId="subject">
+                            >
                             <Form.Label>
                                 {mainData.emailFormSubjectPlaceholder}
                             </Form.Label>
                             <Form.Control
+                                id="subject-emailform"
                                 onChange={handleChange}
                                 as="input"
                                 type="text"
@@ -139,6 +139,7 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
                 <Col>
                     <Form.Group className='input-text-form'>
                         <Form.Control
+                        id="message-emailform"
                             as="textarea"
                             rows={8}
                             defaultValue={dataUser.text}
@@ -159,6 +160,7 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
             </Form>
             <div className={'container buttons-container-email-form'}>
                 <Button
+                id="sendButton-emailform"
                     type={'submit'}
                     className={'button-email-form'}
                     variant={'dark'}
@@ -166,6 +168,7 @@ const EmailForm = ({setShowThankYou, setShowFindForm, dataUser, setDataUser, sho
                     {emailData.sendButton? 'please enter a send-button text on your dashboard':'Enviar'}
                 </Button>
                 <Button
+                id="backButton-emailform"
                     className={'button-email-form'}
                     variant={'dark'}
                     onClick={back}>

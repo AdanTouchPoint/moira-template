@@ -36,6 +36,7 @@ const List = ({setAllDataIn, mp, dataUser,  setEmailData,  setShowFindForm, setS
             {mp.map((mp, index) => (
                 <label key={index} className='list-mp-row' >
                     <input
+                    id="representativeList-checkbox"
                     type='checkbox'
                     checked={checklistStates[index]}
                     onChange={() => toggleChecklist(index)}
@@ -47,7 +48,7 @@ const List = ({setAllDataIn, mp, dataUser,  setEmailData,  setShowFindForm, setS
         <div className='btn-container-checklist'>
             <div className={'buttons'}>
                 <div>
-                    <Button className='list-button' size={'md'} variant={'dark'} onClick={click}>
+                    <Button id="representativeList-button" className='list-button' size={'md'} variant={'dark'} onClick={click}>
                     Proceed to Email
                     </Button>
                 </div>
