@@ -26,7 +26,7 @@ const ProgressBar = ({ leads, mainData }) => {
       <div className="progress-container">
         <div className="progress-bar" style={progressStyle}>
           <div className="progress-label">
-            <span>{progress}</span>
+            <span>{leads}</span>
           </div>
         </div>
       </div>
