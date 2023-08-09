@@ -3,7 +3,7 @@ import { fetchData } from './fetchData';
 const fetchEmailData = async (petitionMethod, backendURLBase, endpoint, clientId, params = '', setDataUser) =>{
   
   const datos = await fetchData(petitionMethod, backendURLBase, endpoint, clientId, params);
-        const payload = datos.data.docs[0].content;  
+        const payload = datos.data?.docs[0].content;  
         // console.log(payload, 'payload')
           
       if (payload.length > 0) {

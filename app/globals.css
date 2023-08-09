@@ -50,11 +50,22 @@ code {
   margin-bottom: 50px;
 }
 .find-her-mp-text{
-  padding: 20px 0;
+  padding: 0px 0;
 }
 .container-content{
   text-align: center;
   padding: 30px;
+}
+.fields-form {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.field {
+  justify-content: center;
+  width:60%;
+  text-align: left;
 }
 .text, .text2{
   text-align: center;
@@ -231,6 +242,19 @@ display: flex;
   }
   h3 > .typ-content{
     line-height: 1.7em !important;
+  }
+  .field {
+    justify-content: center;
+    width:100%;
+    text-align: left;
+  }
+  .instructions{
+    padding: 20px;
+    max-width: 1150px;
+  }
+  .container-content{
+    text-align: center;
+    padding: 10px 12px;
   }
   .list-mp-row{
     display: flex;
