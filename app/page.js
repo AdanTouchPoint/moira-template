@@ -26,8 +26,8 @@ function Home() {
       const [backendURLBaseServices] = useState(`${process.env.NEXT_PUBLIC_URL_SERVICES}`)
       const [clientId] = useState(`${process.env.NEXT_PUBLIC_CLIENT_ID}`)
       const [endpoints] = useState({
-        toGetAllRepresentatives:'/all-senators-demo/',
-        teGetRepresentativesPerStates:'/all-senators-demo/',
+        toGetAllRepresentatives:'/all-senators/',
+        teGetRepresentativesPerStates:'/all-senators/',
         toGetEmailsContent:'/email-message/',
         toGetMainData:'/main/',
         toGetThankYouMessage:'/typ-message/',
