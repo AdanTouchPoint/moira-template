@@ -55,24 +55,31 @@ const MainForm = ({
       [e.target.name]: e.target.value,
     });
   };
-  const { zipCode, emailUser } = dataUser;
   const formFields = mainData.formFields;
-  const click = async (e) => {
-    e.preventDefault();
+  const fieldValidator = () => {
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     const isValidEmail = (email) => {
-      return emailRegex.test(email);
+      return emailRegex.test(email.trim());
     };
+    for (let key in dataUser) {
+      // console.log(key);
+      let value = dataUser[key];
+      if (value === "") return false;
+      if (key === "emailUser") {
+        let value = dataUser[key];
+        if (isValidEmail(value) === false) return false;
+      }
+    }
+  };
+  const click = async (e) => {
+    e.preventDefault();
     const form = e.currentTarget;
     if (form.checkValidity() === false) {
       e.preventDefault();
       e.stopPropagation();
     }
     setValidated(true);
-    if (
-      tac === false ||
-      isValidEmail(emailUser) === false
-    ) {
+    if (tac === false ||  Object.getOwnPropertyNames(dataUser).length === 0 || dataUser.userName === undefined ) {
       setError(true);
       return;
     }

@@ -16,8 +16,7 @@ function Home() {
   })
   const [dataUser, setDataUser] = useState({
     userName: '',
-    zipCode: '',
-    emailUser: '',
+    postalCode: '',
     subject:'',//'The Subject Line is Pre-Filled and can be Edited',
     text:'',//'Users will see a pre-filled email and can edit it before sending. If the system administrator prefers, subject line and/or body text can made uneditable.'
     state:''
